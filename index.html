@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chess Links</title>
+  <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/864/864639.png" />
+  <style>
+    body {
+      background: #181a1b;
+      color: #f3f3f3;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-image: url('https://img.freepik.com/premium-photo/vector-black-minimal-aesthetic-grid-pattern-background_1049240-170.jpg?semt=ais_hybrid&w=740');
+      background-size: 800px 800px;
+      background-repeat: repeat;
+      background-position: 50% 50%;
+      transition: background-position 0.2s cubic-bezier(.25,.46,.45,.94);
+    }
+    h1 {
+      margin-bottom: 40px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      position: relative;
+      z-index: 1;
+    }
+    .animated-underline {
+      display: block;
+      margin: 0 auto 32px auto;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #00c6ff, #0072ff, #00c6ff);
+      border-radius: 2px;
+      animation: gradient-move 2s linear infinite;
+    }
+    @keyframes gradient-move {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+    .glass-card {
+      background: rgba(30, 30, 30, 0.55);
+      box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 24px;
+      padding: 48px 36px 36px 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 1;
+    }
+    .button-group {
+      display: flex;
+      gap: 30px;
+    }
+    .modern-btn {
+      background: linear-gradient(90deg, #232526 0%, #414345 100%);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 18px 40px;
+      font-size: 1.2em;
+      font-weight: 500;
+      cursor: pointer;
+      box-shadow: 0 4px 24px 0 rgba(0,0,0,0.2);
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s, box-shadow 0.3s;
+      outline: none;
+      position: relative;
+      overflow: hidden;
+      /* Add space for chess icon */
+      padding-left: 56px;
+    }
+    .modern-btn .chess-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%) scale(1);
+      width: 28px;
+      height: 28px;
+      transition: transform 0.3s cubic-bezier(.25,.46,.45,.94);
+      pointer-events: none;
+      opacity: 0.85;
+    }
+    .modern-btn:hover .chess-icon {
+      transform: translateY(-50%) scale(1.18) translateX(8px);
+      filter: drop-shadow(0 0 8px #00c6ff88);
+    }
+    .modern-btn::before {
+      content: '';
+      position: absolute;
+      top: -2px; left: -2px; right: -2px; bottom: -2px;
+      border-radius: 14px;
+      background: linear-gradient(270deg, #00c6ff, #0072ff, #00c6ff);
+      z-index: 0;
+      opacity: 0.5;
+      filter: blur(8px);
+      transition: opacity 0.3s;
+      animation: border-gradient 2.5s linear infinite;
+    }
+    @keyframes border-gradient {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+    .modern-btn:hover, .modern-btn:focus {
+      background: linear-gradient(90deg, #414345 0%, #232526 100%);
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 8px 32px 0 rgba(0,0,0,0.3), 0 0 16px #00c6ff99;
+    }
+    .modern-btn:active {
+      transform: scale(0.97);
+      box-shadow: 0 2px 8px 0 rgba(0,0,0,0.2);
+    }
+    .modern-btn span {
+      position: relative;
+      z-index: 1;
+    }
+    .modern-btn::before {
+      pointer-events: none;
+    }
+    .panel {
+      width: 320px;
+      background: rgba(24, 24, 24, 0.95);
+      border-radius: 16px;
+      margin: 30px 0;
+      padding: 20px;
+      box-shadow: 0 0 24px #0008;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 260px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 340px;
+      z-index: 1;
+    }
+    #lichessSearchBtn {
+      margin-bottom: 14px;
+      padding: 8px 18px;
+      border-radius: 6px;
+      border: none;
+      background: #00ffe0;
+      color: #222;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px #00ffe088;
+    }
+    #lichessSearchBtn:hover {
+      background: #00bfae;
+      transform: scale(1.06) translateY(-2px);
+      box-shadow: 0 6px 24px #00ffe0cc;
+    }
+    #lichessSearchBtn:active {
+      background: #00a896;
+      transform: scale(0.97);
+      box-shadow: 0 2px 8px #00ffe088;
+    }
+    .spinner {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      border: 4px solid #00ffe0;
+      border-top: 4px solid #222;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 16px auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+    <img id="bouncingPawn" src="https://cdn-icons-png.flaticon.com/512/864/864639.png" style="position:fixed; left:50vw; top:50vh; width:48px; height:48px; z-index:-1; pointer-events:none; user-select:none;" alt="Bouncing Pawn" />
+    <div style="display: flex; width: 100vw; min-height: 100vh; align-items: stretch; justify-content: space-between; box-sizing: border-box; padding: 0 4vw;">
+      <!-- Left Panel: Lichess Leaderboard with Time Control Dropdown -->
+      <div class="panel" id="lichess-panel" style="width:320px; background:rgba(24,24,24,0.95); border-radius:16px; margin:30px 0; padding:20px; box-shadow:0 0 24px #0008; display:flex; flex-direction:column; align-items:center; min-width:260px; max-height:90vh; overflow-y:auto;">
+        <h2>Lichess Leaderboard</h2>
+        <label for="timeControlSelect" style="margin-bottom:10px;">Leaderboard:</label>
+        <select id="timeControlSelect" style="margin-bottom:18px; padding:6px 12px; border-radius:6px; border:none; font-size:1em;">
+          <option value="bullet">Bullet</option>
+          <option value="blitz">Blitz</option>
+          <option value="rapid">Rapid</option>
+          <option value="classical">Classical</option>
+          <option value="chess960">Chess960</option>
+          <option value="threeCheck">Three-check</option>
+          <option value="antichess">Antichess</option>
+          <option value="atomic">Atomic</option>
+          <option value="horde">Horde</option>
+          <option value="kingOfTheHill">King of the Hill</option>
+          <option value="racingKings">Racing Kings</option>
+        </select>
+        <div id="lichess-leaderboard">Loading...</div>
+      </div>
+      <!-- Main Content -->
+      <div class="main-content" style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; min-width:340px; z-index:1; margin:0 3vw;">
+        <div class="glass-card">
+          <h1>Chess Links</h1>
+          <span class="animated-underline"></span>
+          <div class="button-group">
+            <button class="modern-btn" data-action="lichess">
+              <span class="chess-icon">&#9816;</span>
+              <span>Lichess.org</span>
+            </button>
+            <button class="modern-btn" data-action="chesscom">
+              <span class="chess-icon">&#9812;</span>
+              <span>Chess.com</span>
+            </button>
+          </div>
+          <div style="display: flex; justify-content: center; margin-top: 32px;">
+            <button class="modern-btn" data-action="home">
+              <span class="chess-icon">&#9818;</span>
+              <span>Back to Homepage</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Right Panel: Lichess Recent Games -->
+      <div class="panel" id="lichess-games-panel" style="width:320px; background:rgba(24,24,24,0.95); border-radius:16px; margin:30px 0; padding:20px; box-shadow:0 0 24px #0008; display:flex; flex-direction:column; align-items:center; min-width:260px; max-height:90vh; overflow-y:auto;">
+        <h2>Recent Lichess Games</h2>
+        <label for="lichessUserInput" style="margin-bottom:10px;">Username:</label>
+        <input id="lichessUserInput" type="text" placeholder="e.g. MagnusCarlsen" style="margin-bottom:12px; padding:6px 12px; border-radius:6px; border:none; font-size:1em; width:90%;">
+        <button id="lichessSearchBtn" onclick="fetchLichessGames()" style="margin-bottom:14px; padding:8px 18px; border-radius:6px; border:none; background:#00ffe0; color:#222; font-weight:600; cursor:pointer; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; box-shadow: 0 2px 8px #00ffe088;">
+          Show Games
+        </button>
+        <div id="lichess-games">Enter a username and click Show Games.</div>
+      </div>
+    </div>
+    <audio id="chessMoveSound" src="https://cdn.jsdelivr.net/gh/lichess-org/lila@master/public/sound/standard/Move.mp3" preload="auto"></audio>
+    <audio id="chessCaptureSound" src="https://cdn.jsdelivr.net/gh/lichess-org/lila@master/public/sound/standard/Capture.mp3" preload="auto"></audio>
+  <script>
+    // Parallax background effect (optimized for smoothness)
+    let parallaxX = 50, parallaxY = 50, targetX = 50, targetY = 50;
+    document.addEventListener('mousemove', function(e) {
+      targetX = 50 + (e.clientX / window.innerWidth - 0.5) * 40;
+      targetY = 50 + (e.clientY / window.innerHeight - 0.5) * 40;
+    });
+    function animateParallax() {
+      parallaxX += (targetX - parallaxX) * 0.08;
+      parallaxY += (targetY - parallaxY) * 0.08;
+      document.body.style.backgroundPosition = `${parallaxX}% ${parallaxY}%`;
+      requestAnimationFrame(animateParallax);
+    }
+    animateParallax();
+
+    // Play chess move sound effect
+    function playChessMoveSound() {
+      const audio = document.getElementById('chessMoveSound');
+      audio.currentTime = 0;
+      audio.play();
+    }
+    // Play chess capture sound effect
+    function playChessCaptureSound() {
+      const audio = document.getElementById('chessCaptureSound');
+      audio.currentTime = 0;
+      audio.play();
+    }
+
+    // Update button click handlers to use capture sound
+    document.querySelectorAll('.modern-btn').forEach(btn => {
+      btn.onclick = function(e) {
+        playChessCaptureSound();
+        const action = btn.getAttribute('data-action');
+        if (action === 'lichess') window.open('https://lichess.org', '_blank');
+        else if (action === 'chesscom') window.open('https://chess.com', '_blank');
+        else if (action === 'home') window.open('https://www.lokiclarke.com', '_self');
+      };
+    });
+
+    // Fetch Lichess Leaderboard for selected time control
+    async function fetchLichessLeaderboard() {
+      const timeControl = document.getElementById('timeControlSelect').value;
+      document.getElementById('lichess-leaderboard').textContent = 'Loading...';
+      document.getElementById('lichess-leaderboard').innerHTML = '<div class="spinner"></div>';
+      try {
+        const res = await fetch(`https://lichess.org/api/player/top/20/${timeControl}`);
+        const data = await res.json();
+        let html = '<ol style="padding-left:20px;">';
+        data.users.forEach((user, i) => {
+          html += `<li><a href="https://lichess.org/@/${user.id}" target="_blank" style="color:#00ffe0;text-decoration:none;">${user.username}</a> <span style="color:#aaa;">(${user.perfs[timeControl].rating})</span></li>`;
+        });
+        html += '</ol>';
+        document.getElementById('lichess-leaderboard').innerHTML = html;
+      } catch (e) {
+        document.getElementById('lichess-leaderboard').textContent = 'Failed to load leaderboard.';
+      }
+    }
+    document.getElementById('timeControlSelect').addEventListener('change', fetchLichessLeaderboard);
+    fetchLichessLeaderboard();
+
+    // Fetch Lichess Recent Games for a user
+    async function fetchLichessGames() {
+      const username = document.getElementById('lichessUserInput').value.trim();
+      const gamesDiv = document.getElementById('lichess-games');
+      if (!username) {
+        gamesDiv.textContent = 'Please enter a username.';
+        return;
+      }
+      gamesDiv.innerHTML = '<div class="spinner"></div>';
+      try {
+        const res = await fetch(`https://lichess.org/api/games/user/${username}?max=10&opening=true&clocks=false&evals=false&perfType=bullet,blitz,rapid,classical&moves=false`, {
+          headers: { 'Accept': 'application/x-ndjson' }
+        });
+        if (!res.ok) throw new Error('User not found or error fetching games');
+        const text = await res.text();
+        const games = text.trim().split('\n').map(line => JSON.parse(line));
+        if (!games.length || !games[0].id) {
+          gamesDiv.textContent = 'No recent games found.';
+          return;
+        }
+        function timeAgo(ts) {
+          const now = Date.now() / 1000;
+          const diff = Math.floor(now - ts);
+          if (diff < 60) return diff + 's ago';
+          if (diff < 3600) return Math.floor(diff/60) + 'm ago';
+          if (diff < 86400) return Math.floor(diff/3600) + 'h ago';
+          return Math.floor(diff/86400) + 'd ago';
+        }
+        function getResult(game, username) {
+          const userColor = game.players.white.user && game.players.white.user.name.toLowerCase() === username.toLowerCase() ? 'white' : 'black';
+          const result = game.status === 'draw' ? 'Draw' : (game.winner === userColor ? 'Win' : 'Loss');
+          return result;
+        }
+        let winCount = 0;
+        let html = '<ol style="padding-left:20px;">';
+        games.forEach(game => {
+          const opp = game.players.white.user && game.players.white.user.name.toLowerCase() === username.toLowerCase()
+            ? game.players.black.user.name : game.players.white.user.name;
+          const color = game.players.white.user && game.players.white.user.name.toLowerCase() === username.toLowerCase() ? 'White' : 'Black';
+          const result = getResult(game, username);
+          if (result === 'Win') winCount++;
+          html += `<li style=\"margin-bottom:18px;\"><a href=\"https://lichess.org/${game.id}\" target=\"_blank\" style=\"color:#00ffe0;text-decoration:none;\">vs ${opp}</a> <span style=\"color:#aaa;\">(${color}, ${result}, ${timeAgo(game.createdAt/1000)})</span></li>`;
+        });
+        html += '</ol>';
+        const winrate = Math.round((winCount / games.length) * 100);
+        gamesDiv.innerHTML = html + `<div style=\"margin-top:24px;text-align:center;font-weight:600;font-size:1.1em;\">Winrate: <span style=\"color:#00ffe0;\">${winrate}%</span> (${winCount}/${games.length})</div>`;
+      } catch (e) {
+        gamesDiv.textContent = 'Failed to load games.';
+      }
+    }
+    // Bouncing pawn animation with sound
+    const pawn = document.getElementById('bouncingPawn');
+    let px = window.innerWidth / 2, py = window.innerHeight / 2;
+    let vx = 2.2 * (Math.random() > 0.5 ? 1 : -1), vy = 1.8 * (Math.random() > 0.5 ? 1 : -1);
+    const pawnSize = 48;
+    function animatePawn() {
+      let bounced = false;
+      px += vx;
+      py += vy;
+      if (px <= 0) { px = 0; vx = Math.abs(vx); bounced = true; }
+      if (px + pawnSize >= window.innerWidth) { px = window.innerWidth - pawnSize; vx = -Math.abs(vx); bounced = true; }
+      if (py <= 0) { py = 0; vy = Math.abs(vy); bounced = true; }
+      if (py + pawnSize >= window.innerHeight) { py = window.innerHeight - pawnSize; vy = -Math.abs(vy); bounced = true; }
+      pawn.style.left = px + 'px';
+      pawn.style.top = py + 'px';
+      if (bounced) playChessMoveSound();
+      requestAnimationFrame(animatePawn);
+    }
+    animatePawn();
+  </script>
+  </body>
+</html>

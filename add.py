@@ -1,0 +1,13 @@
+from os import system
+
+def main():
+    longurl = input("Enter the long URL: ")
+    shorturl = input("Enter the short URL: ")
+    with open("_redirects", "a") as f:
+        f.write(f"/{shorturl} {longurl} 301\n")
+    print("Redirect added successfully.")
+
+if __name__ == "__main__":
+    main()
+
+
