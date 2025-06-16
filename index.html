@@ -211,17 +211,17 @@
           <h1>Chess Links</h1>
           <span class="animated-underline"></span>
           <div class="button-group">
-            <button class="modern-btn" onclick="playChessSound(); window.open('https://lichess.org', '_blank')">
+            <button class="modern-btn" data-action="lichess">
               <span class="chess-icon">&#9816;</span>
               <span>Lichess.org</span>
             </button>
-            <button class="modern-btn" onclick="playChessSound(); window.open('https://chess.com', '_blank')">
+            <button class="modern-btn" data-action="chesscom">
               <span class="chess-icon">&#9812;</span>
               <span>Chess.com</span>
             </button>
           </div>
           <div style="display: flex; justify-content: center; margin-top: 32px;">
-            <button class="modern-btn" onclick="playChessSound(); window.open('https://www.lokiclarke.com', '_self')">
+            <button class="modern-btn" data-action="home">
               <span class="chess-icon">&#9818;</span>
               <span>Back to Homepage</span>
             </button>
@@ -240,6 +240,7 @@
       </div>
     </div>
     <audio id="chessMoveSound" src="https://cdn.jsdelivr.net/gh/lichess-org/lila@master/public/sound/standard/Move.mp3" preload="auto"></audio>
+    <audio id="chessCaptureSound" src="https://cdn.jsdelivr.net/gh/lichess-org/lila@master/public/sound/standard/Capture.mp3" preload="auto"></audio>
   <script>
     // Parallax background effect (optimized for smoothness)
     let parallaxX = 50, parallaxY = 50, targetX = 50, targetY = 50;
@@ -255,30 +256,29 @@
     }
     animateParallax();
 
-    // Bouncing pawn animation
-    const pawn = document.getElementById('bouncingPawn');
-    let px = window.innerWidth / 2, py = window.innerHeight / 2;
-    let vx = 2.2 * (Math.random() > 0.5 ? 1 : -1), vy = 1.8 * (Math.random() > 0.5 ? 1 : -1);
-    const pawnSize = 48;
-    function animatePawn() {
-      px += vx;
-      py += vy;
-      if (px <= 0) { px = 0; vx = Math.abs(vx); }
-      if (px + pawnSize >= window.innerWidth) { px = window.innerWidth - pawnSize; vx = -Math.abs(vx); }
-      if (py <= 0) { py = 0; vy = Math.abs(vy); }
-      if (py + pawnSize >= window.innerHeight) { py = window.innerHeight - pawnSize; vy = -Math.abs(vy); }
-      pawn.style.left = px + 'px';
-      pawn.style.top = py + 'px';
-      requestAnimationFrame(animatePawn);
-    }
-    animatePawn();
-
     // Play chess move sound effect
-    function playChessSound() {
+    function playChessMoveSound() {
       const audio = document.getElementById('chessMoveSound');
       audio.currentTime = 0;
       audio.play();
     }
+    // Play chess capture sound effect
+    function playChessCaptureSound() {
+      const audio = document.getElementById('chessCaptureSound');
+      audio.currentTime = 0;
+      audio.play();
+    }
+
+    // Update button click handlers to use capture sound
+    document.querySelectorAll('.modern-btn').forEach(btn => {
+      btn.onclick = function(e) {
+        playChessCaptureSound();
+        const action = btn.getAttribute('data-action');
+        if (action === 'lichess') window.open('https://lichess.org', '_blank');
+        else if (action === 'chesscom') window.open('https://chess.com', '_blank');
+        else if (action === 'home') window.open('https://www.lokiclarke.com', '_self');
+      };
+    });
 
     // Fetch Lichess Leaderboard for selected time control
     async function fetchLichessLeaderboard() {
@@ -351,6 +351,25 @@
         gamesDiv.textContent = 'Failed to load games.';
       }
     }
+    // Bouncing pawn animation with sound
+    const pawn = document.getElementById('bouncingPawn');
+    let px = window.innerWidth / 2, py = window.innerHeight / 2;
+    let vx = 2.2 * (Math.random() > 0.5 ? 1 : -1), vy = 1.8 * (Math.random() > 0.5 ? 1 : -1);
+    const pawnSize = 48;
+    function animatePawn() {
+      let bounced = false;
+      px += vx;
+      py += vy;
+      if (px <= 0) { px = 0; vx = Math.abs(vx); bounced = true; }
+      if (px + pawnSize >= window.innerWidth) { px = window.innerWidth - pawnSize; vx = -Math.abs(vx); bounced = true; }
+      if (py <= 0) { py = 0; vy = Math.abs(vy); bounced = true; }
+      if (py + pawnSize >= window.innerHeight) { py = window.innerHeight - pawnSize; vy = -Math.abs(vy); bounced = true; }
+      pawn.style.left = px + 'px';
+      pawn.style.top = py + 'px';
+      if (bounced) playChessMoveSound();
+      requestAnimationFrame(animatePawn);
+    }
+    animatePawn();
   </script>
   </body>
 </html>
