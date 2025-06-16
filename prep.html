@@ -91,6 +91,7 @@
       const resultDiv = document.getElementById('openings-result');
       const winrateDiv = document.getElementById('winrates-result');
       const strengthDiv = document.getElementById('strength-result');
+      let lastFetchedGames = [];
       if (!username) {
         resultDiv.innerHTML = '<span style="color:#ff6666;">Please enter a username.</span>';
         winrateDiv.innerHTML = '';
@@ -110,6 +111,7 @@
         if (!res.ok) throw new Error('User not found or error fetching games');
         const text = await res.text();
         let games = text.trim().split('\n').map(line => JSON.parse(line)).filter(g => g.opening && g.opening.name);
+        lastFetchedGames = games;
         // Filter by color if selected
         if (userColor === 'white') {
           games = games.filter(g => g.players.black.user && g.players.black.user.name.toLowerCase() === username.toLowerCase());
@@ -181,6 +183,8 @@
         strengthDiv.innerHTML = '';
       }
     };
+    // Store games globally for download
+    window.lastFetchedGames = [];
     // Add event listeners for sorting
     document.getElementById('winrate-order').addEventListener('change', () => document.getElementById('prep-form').onsubmit(new Event('submit')));
     document.getElementById('strength-order').addEventListener('change', () => document.getElementById('prep-form').onsubmit(new Event('submit')));
