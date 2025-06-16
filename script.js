@@ -31,7 +31,7 @@ document.querySelectorAll('.modern-btn').forEach(btn => {
     playChessCaptureSound();
     const action = btn.getAttribute('data-action');
     if (action === 'lichess') window.open('https://lichess.org', '_blank');
-    else if (action === 'chesscom') window.open('https://chess.com', '_blank');
+    else if (action === 'prep') window.location.href = 'prep.html';
     else if (action === 'home') window.open('https://www.lokiclarke.com', '_self');
   };
 });
