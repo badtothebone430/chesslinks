@@ -73,7 +73,9 @@ async function fetchLichessGames() {
     if (!res.ok) throw new Error('User not found or error fetching games');
     const text = await res.text();
     const games = text.trim().split('\n').map(line => JSON.parse(line));
-    if (!games.length || !games[0].id) {
+    // Only keep the 10 most recent games
+    const recentGames = games.slice(0, 10);
+    if (!recentGames.length || !recentGames[0].id) {
       gamesDiv.textContent = 'No recent games found.';
       return;
     }
@@ -92,7 +94,7 @@ async function fetchLichessGames() {
     }
     let winCount = 0;
     let html = '<ol style="padding-left:20px;">';
-    games.forEach(game => {
+    recentGames.forEach(game => {
       const opp = game.players.white.user && game.players.white.user.name.toLowerCase() === username.toLowerCase()
         ? game.players.black.user.name : game.players.white.user.name;
       const color = game.players.white.user && game.players.white.user.name.toLowerCase() === username.toLowerCase() ? 'White' : 'Black';
@@ -101,8 +103,8 @@ async function fetchLichessGames() {
       html += `<li style=\"margin-bottom:18px;\"><a href=\"https://lichess.org/${game.id}\" target=\"_blank\" style=\"color:#00ffe0;text-decoration:none;\">vs ${opp}</a> <span style=\"color:#aaa;\">(${color}, ${result}, ${timeAgo(game.createdAt/1000)})</span></li>`;
     });
     html += '</ol>';
-    const winrate = Math.round((winCount / games.length) * 100);
-    gamesDiv.innerHTML = html + `<div style=\"margin-top:24px;text-align:center;font-weight:600;font-size:1.1em;\">Winrate: <span style=\"color:#00ffe0;\">${winrate}%</span> (${winCount}/${games.length})</div>`;
+    const winrate = Math.round((winCount / recentGames.length) * 100);
+    gamesDiv.innerHTML = html + `<div style=\"margin-top:24px;text-align:center;font-weight:600;font-size:1.1em;\">Winrate: <span style=\"color:#00ffe0;\">${winrate}%</span> (${winCount}/${recentGames.length})</div>`;
   } catch (e) {
     gamesDiv.textContent = 'Failed to load games.';
   }
