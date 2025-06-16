@@ -114,16 +114,19 @@ const pawn = document.getElementById('bouncingPawn');
 let px = window.innerWidth / 2, py = window.innerHeight / 2;
 let vx = 2.2 * (Math.random() > 0.5 ? 1 : -1), vy = 1.8 * (Math.random() > 0.5 ? 1 : -1);
 const pawnSize = 48;
+let rotation = 0;
 function animatePawn() {
   let bounced = false;
   px += vx;
   py += vy;
+  rotation += 4; // Increase rotation angle
   if (px <= 0) { px = 0; vx = Math.abs(vx); bounced = true; }
   if (px + pawnSize >= window.innerWidth) { px = window.innerWidth - pawnSize; vx = -Math.abs(vx); bounced = true; }
   if (py <= 0) { py = 0; vy = Math.abs(vy); bounced = true; }
   if (py + pawnSize >= window.innerHeight) { py = window.innerHeight - pawnSize; vy = -Math.abs(vy); bounced = true; }
   pawn.style.left = px + 'px';
   pawn.style.top = py + 'px';
+  pawn.style.transform = `rotate(${rotation}deg)`;
   if (bounced) playChessMoveSound();
   requestAnimationFrame(animatePawn);
 }
