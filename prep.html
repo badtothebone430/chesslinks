@@ -8,11 +8,47 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="main-content" style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; min-width:340px; z-index:1; margin:0 3vw;">
-    <div class="glass-card">
+  <div class="main-content" style="flex:1; display:flex; flex-direction:row; align-items:flex-start; justify-content:center; min-width:340px; z-index:1; margin:48px 3vw 0 3vw; gap:32px;">
+    <div id="winrate-panel" class="glass-card scroll-panel" style="min-width:220px;max-width:260px;align-items:flex-start;max-height:80vh;overflow-y:auto;">
+      <h3 style="color:#00ffe0;">Winrates by Opening</h3>
+      <div id="winrate-sort-controls" style="margin-bottom:12px;">
+        <label style="color:#f3f3f3;font-size:0.98em;">Order: </label>
+        <select id="winrate-order" style="padding:4px 10px;border-radius:6px;border:none;font-size:1em;">
+          <option value="desc">Descending</option>
+          <option value="asc">Ascending</option>
+        </select>
+      </div>
+      <div id="winrates-result" style="margin-top:18px;width:100%;"></div>
+    </div>
+    <div class="glass-card scroll-panel" style="flex:1;min-width:320px;max-height:80vh;overflow-y:auto;">
       <h1>Prep Assist</h1>
-      <span class="animated-underline"></span>
-      <p style="margin-top:24px; font-size:1.2em; color:#00ffe0;">This page will help you prepare for your next chess game. (Coming soon!)</p>
+      <form id="prep-form" style="margin-top:24px;display:flex;flex-direction:column;align-items:center;gap:16px;">
+        <span class="animated-underline"></span>
+        <input id="opp-username" type="text" placeholder="Opponent's Lichess Username" style="padding:8px 16px;border-radius:8px;border:none;font-size:1.1em;width:220px;">
+        <select id="time-control" style="padding:8px 16px;border-radius:8px;border:none;font-size:1.1em;width:220px;">
+          <option value="bullet">Bullet</option>
+          <option value="blitz">Blitz</option>
+          <option value="rapid">Rapid</option>
+          <option value="classical">Classical</option>
+        </select>
+        <div style="display:flex;align-items:center;gap:8px;width:220px;">
+          <span style="color:#f3f3f3;font-size:1em;">I am playing with</span>
+          <select id="user-color" style="padding:8px 16px;border-radius:8px;border:none;font-size:1.1em;flex:1;">
+            <option value="any">Any Color</option>
+            <option value="white">White</option> <!--dont edit this-->
+            <option value="black">Black</option><!--dont edit this-->
+          </select>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;width:220px;">
+          <span style="color:#f3f3f3;font-size:1em;">Search depth</span>
+          <select id="search-depth" style="padding:8px 16px;border-radius:8px;border:none;font-size:1.1em;flex:1;">
+            <option value="quick">Quick (50 games)</option>
+            <option value="deep">Deep (300 games)</option>
+          </select>
+        </div>
+        <button type="submit" class="modern-btn" style="width:220px;">Analyze</button>
+      </form>
+      <div id="openings-result" style="margin-top:32px;width:100%;text-align:center;"></div>
       <div style="display: flex; justify-content: center; margin-top: 32px;">
         <a href="index.html" class="modern-btn" style="text-decoration:none;">
           <span class="chess-icon">&#9818;</span>
@@ -20,7 +56,134 @@
         </a>
       </div>
     </div>
+    <div id="strength-panel" class="glass-card scroll-panel" style="min-width:220px;max-width:260px;align-items:flex-start;max-height:80vh;overflow-y:auto;">
+      <h3 style="color:#00ffe0;">Openings by Opponent Strength</h3>
+      <div id="strength-sort-controls" style="margin-bottom:12px;">
+        <label style="color:#f3f3f3;font-size:0.98em;">Order: </label>
+        <select id="strength-order" style="padding:4px 10px;border-radius:6px;border:none;font-size:1em;">
+          <option value="desc">Descending</option>
+          <option value="asc">Ascending</option>
+        </select>
+      </div>
+      <div id="strength-result" style="margin-top:18px;width:100%;"></div>
+    </div>
   </div>
-  <div id="footer-credit">Made By Loki Clarke</div>
+  <script>
+    // Parallax background effect (same as main page)
+    let parallaxX = 50, parallaxY = 50, targetX = 50, targetY = 50;
+    document.addEventListener('mousemove', function(e) {
+      targetX = 50 + (e.clientX / window.innerWidth - 0.5) * 40;
+      targetY = 50 + (e.clientY / window.innerHeight - 0.5) * 40;
+    });
+    function animateParallax() {
+      parallaxX += (targetX - parallaxX) * 0.08;
+      parallaxY += (targetY - parallaxY) * 0.08;
+      document.body.style.backgroundPosition = `${parallaxX}% ${parallaxY}%`;
+      requestAnimationFrame(animateParallax);
+    }
+    animateParallax();
+    document.getElementById('prep-form').onsubmit = async function(e) {
+      e.preventDefault();
+      const username = document.getElementById('opp-username').value.trim();
+      const timeControl = document.getElementById('time-control').value;
+      const userColor = document.getElementById('user-color').value;
+      const searchDepth = document.getElementById('search-depth').value;
+      const resultDiv = document.getElementById('openings-result');
+      const winrateDiv = document.getElementById('winrates-result');
+      const strengthDiv = document.getElementById('strength-result');
+      if (!username) {
+        resultDiv.innerHTML = '<span style="color:#ff6666;">Please enter a username.</span>';
+        winrateDiv.innerHTML = '';
+        strengthDiv.innerHTML = '';
+        return;
+      }
+      resultDiv.innerHTML = '<div class="spinner"></div>';
+      winrateDiv.innerHTML = '';
+      strengthDiv.innerHTML = '';
+      try {
+        // Set max games based on search depth
+        const maxGames = searchDepth === 'deep' ? 300 : 50;
+        // Fetch games for the user in the selected time control
+        const res = await fetch(`https://lichess.org/api/games/user/${username}?max=${maxGames}&perfType=${timeControl}&opening=true`, {
+          headers: { 'Accept': 'application/x-ndjson' }
+        });
+        if (!res.ok) throw new Error('User not found or error fetching games');
+        const text = await res.text();
+        let games = text.trim().split('\n').map(line => JSON.parse(line)).filter(g => g.opening && g.opening.name);
+        // Filter by color if selected
+        if (userColor === 'white') {
+          games = games.filter(g => g.players.black.user && g.players.black.user.name.toLowerCase() === username.toLowerCase());
+        } else if (userColor === 'black') {
+          games = games.filter(g => g.players.white.user && g.players.white.user.name.toLowerCase() === username.toLowerCase());
+        }
+        if (!games.length) {
+          resultDiv.innerHTML = '<span style="color:#ff6666;">No games with opening data found for this user, time control, and color.</span>';
+          winrateDiv.innerHTML = '';
+          strengthDiv.innerHTML = '';
+          return;
+        }
+        // Count most played openings and winrates
+        const openingCounts = {};
+        const openingResults = {};
+        const openingStrength = {};
+        games.forEach(g => {
+          const name = g.opening.name;
+          openingCounts[name] = (openingCounts[name] || 0) + 1;
+          if (!openingResults[name]) openingResults[name] = {win:0, draw:0, loss:0};
+          let userColorInGame = g.players.white.user && g.players.white.user.name.toLowerCase() === username.toLowerCase() ? 'white' : 'black';
+          let result = g.status === 'draw' ? 'draw' : (g.winner === userColorInGame ? 'win' : 'loss');
+          openingResults[name][result]++;
+          // Opponent rating
+          let oppRating = userColorInGame === 'white' ? (g.players.black.rating || 0) : (g.players.white.rating || 0);
+          if (!openingStrength[name]) openingStrength[name] = [];
+          openingStrength[name].push(oppRating);
+        });
+        const sorted = Object.entries(openingCounts).sort((a,b) => b[1]-a[1]);
+        // Openings list
+        let html = `<h3 style='color:#00ffe0;'>Most Played Openings (${games.length} games)</h3><ol style='margin:0 auto;max-width:320px;text-align:left;'>`;
+        sorted.slice(0, 8).forEach(([name, count]) => {
+          html += `<li><span style='color:#fff;'>${name}</span> <span style='color:#aaa;'>(${count} games)</span></li>`;
+        });
+        html += '</ol>';
+        resultDiv.innerHTML = html;
+        // Winrates list (rank by winrate)
+        let winArr = sorted.map(([name]) => {
+          const res = openingResults[name];
+          const total = res.win + res.draw + res.loss;
+          const winrate = total ? Math.round((res.win / total) * 100) : 0;
+          return {name, winrate, res, total};
+        });
+        // Sort by winrate
+        const winOrder = document.getElementById('winrate-order').value;
+        winArr = winArr.sort((a, b) => winOrder === 'asc' ? a.winrate - b.winrate : b.winrate - a.winrate);
+        let winHtml = '<ol style="margin:0 auto;max-width:220px;text-align:left;">';
+        winArr.slice(0, 8).forEach(o => {
+          winHtml += `<li><span style='color:#fff;'>${o.name}</span><br><span style='color:#00ffe0;'>Winrate: ${o.winrate}%</span> <span style='color:#aaa;'>(${o.res.win}W/${o.res.draw}D/${o.res.loss}L)</span></li>`;
+        });
+        winHtml += '</ol>';
+        winrateDiv.innerHTML = winHtml;
+        // Openings by opponent strength
+        let strengthArr = Object.entries(openingStrength).map(([name, arr]) => {
+          const avg = arr.length ? Math.round(arr.reduce((a,b) => a+b,0)/arr.length) : 0;
+          return {name, avg, count: arr.length};
+        });
+        const strengthOrder = document.getElementById('strength-order').value;
+        strengthArr = strengthArr.sort((a,b) => strengthOrder === 'asc' ? a.avg - b.avg : b.avg - a.avg);
+        let strengthHtml = '<ol style="margin:0 auto;max-width:220px;text-align:left;">';
+        strengthArr.slice(0, 8).forEach(o => {
+          strengthHtml += `<li><span style='color:#fff;'>${o.name}</span><br><span style='color:#00ffe0;'>Avg Opponent: ${o.avg}</span> <span style='color:#aaa;'>(${o.count} games)</span></li>`;
+        });
+        strengthHtml += '</ol>';
+        strengthDiv.innerHTML = strengthHtml;
+      } catch (e) {
+        resultDiv.innerHTML = '<span style="color:#ff6666;">Failed to load games or user not found.</span>';
+        winrateDiv.innerHTML = '';
+        strengthDiv.innerHTML = '';
+      }
+    };
+    // Add event listeners for sorting
+    document.getElementById('winrate-order').addEventListener('change', () => document.getElementById('prep-form').onsubmit(new Event('submit')));
+    document.getElementById('strength-order').addEventListener('change', () => document.getElementById('prep-form').onsubmit(new Event('submit')));
+  </script>
 </body>
 </html>

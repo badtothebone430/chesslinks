@@ -29,6 +29,8 @@ h1 {
   background: linear-gradient(90deg, #00c6ff, #0072ff, #00c6ff);
   border-radius: 2px;
   animation: gradient-move 2s linear infinite;
+  position: relative;
+  z-index: 2;
 }
 @keyframes gradient-move {
   0% { background-position: 0% 50%; }
@@ -45,6 +47,9 @@ h1 {
   flex-direction: column;
   align-items: center;
   z-index: 1;
+}
+.scroll-panel {
+  padding: 32px 24px 32px 24px !important;
 }
 .button-group {
   display: flex;
