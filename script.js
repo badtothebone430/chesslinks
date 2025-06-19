@@ -33,6 +33,7 @@ document.querySelectorAll('.modern-btn').forEach(btn => {
     if (action === 'lichess') window.open('https://lichess.org', '_blank');
     else if (action === 'prep') window.location.href = '/prep';
     else if (action === 'home') window.open('https://www.lokiclarke.com', '_self');
+    else if (action === 'openings') window.location.href = 'opening-recommender.html';
   };
 });
 
