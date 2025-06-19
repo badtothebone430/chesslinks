@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Opening Recommender</title>
+  <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/864/864639.png" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Add chess.js via CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+</head>
+<body>
+  <div style="display: flex; width: 100vw; min-height: 100vh; align-items: stretch; justify-content: space-between; box-sizing: border-box; padding: 0 4vw;">
+    <!-- Left: White Recommendations -->
+    <div class="panel" id="white-widget" style="width:320px; background:rgba(24,24,24,0.95); border-radius:16px; margin:30px 0; padding:20px; box-shadow:0 0 24px #0008; display:flex; flex-direction:column; align-items:center; min-width:260px; max-height:90vh; overflow-y:auto;">
+      <h2 style="text-align:center;">White</h2>
+      <div id="white-kings-pawn"></div>
+      <div id="white-queens-pawn"></div>
+      <div id="white-flank-pawn"></div>
+    </div>
+    <!-- Center: Main Quiz Card -->
+    <div class="main-content" style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; min-width:340px; z-index:1; margin:0 3vw;">
+      <div class="glass-card" style="margin:48px auto; max-width:520px;">
+        <h1>Opening Recommender</h1>
+        <form id="opening-quiz-form" style="display:flex; flex-direction:column; gap:18px; align-items:center;">
+          <!-- Questions will be added here by JS or you can scaffold them manually -->
+        </form>
+      </div>
+      <div style="text-align:center; margin-top:32px;">
+        <a href="index.html" class="modern-btn" style="text-decoration:none;">
+          <span class="chess-icon">&#9818;</span>
+          <span>Back to Main</span>
+        </a>
+      </div>
+    </div>
+    <!-- Right: Black Recommendations -->
+    <div class="panel" id="black-widget" style="width:320px; background:rgba(24,24,24,0.95); border-radius:16px; margin:30px 0; padding:20px; box-shadow:0 0 24px #0008; display:flex; flex-direction:column; align-items:center; min-width:260px; max-height:90vh; overflow-y:auto;">
+      <h2 style="text-align:center;">Black</h2>
+      <div id="black-kings-pawn"></div>
+      <div id="black-queens-pawn"></div>
+      <div id="black-flank-pawn"></div>
+    </div>
+  </div>
+  <script src="opening-recommender.js"></script>
+</body>
+</html>

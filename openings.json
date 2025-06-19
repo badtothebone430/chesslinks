@@ -1,0 +1,338 @@
+[
+  {
+    "name": "Ruy Lopez",
+    "eco": "C60",
+    "color": "white",
+    "tags": ["positional", "classical", "mainline", "attacking", "easy", "rapid", "blitz", "standard", "vs-kings-pawn"],
+    "moves": "1.e4 e5 2.Nf3 Nc6 3.Bb5"
+  },
+  {
+    "name": "Italian Game",
+    "eco": "C50",
+    "color": "white",
+    "tags": ["classical", "easy", "open", "beginner-friendly", "rapid", "blitz", "standard", "vs-kings-pawn"],
+    "moves": "1.e4 e5 2.Nf3 Nc6 3.Bc4"
+  },
+  {
+    "name": "Sicilian Defense",
+    "eco": "B20",
+    "color": "black",
+    "tags": ["tactical", "sharp", "counterattacking", "blitz", "rapid", "standard", "open", "mainline", "serious", "middlegame", "vs-flank-pawn"],
+    "moves": "1.e4 c5"
+  },
+  {
+    "name": "French Defense",
+    "eco": "C00",
+    "color": "black",
+    "tags": ["positional", "solid", "defensive", "closed", "standard", "easy", "rapid", "mainline", "endgame", "vs-kings-pawn"],
+    "moves": "1.e4 e6"
+  },
+  {
+    "name": "French Exchange",
+    "eco": "C01",
+    "color": "black",
+    "tags": ["positional", "solid", "defensive", "closed", "standard", "easy", "rapid", "endgame", "sideline", "vs-kings-pawn"],
+    "moves": "1.e4 e6 2.d4 d5 3.exd5 exd5"
+  },
+  {
+    "name": "King's Indian Defense",
+    "eco": "E60",
+    "color": "black",
+    "tags": ["tactical", "sharp", "counterattacking", "complex", "rapid", "blitz", "standard", "vs-queens-pawn"],
+    "moves": "1.d4 Nf6 2.c4 g6 3.Nc3 Bg7"
+  },
+  {
+    "name": "London System",
+    "eco": "D02",
+    "color": "white",
+    "tags": ["positional", "solid", "easy", "beginner-friendly", "standard", "rapid", "blitz", "casual", "mainline", "endgame", "vs-kings-pawn"],
+    "moves": "1.d4 d5 2.Nf3 Nf6 3.Bf4"
+  },
+  {
+    "name": "King's Gambit",
+    "eco": "C30",
+    "color": "white",
+    "tags": ["tactical", "sharp", "attacking", "open", "blitz", "middlegame", "meme", "sideline", "vs-kings-pawn"],
+    "moves": "1.e4 e5 2.f4"
+  },
+  {
+    "name": "Scandinavian Defense",
+    "eco": "B01",
+    "color": "black",
+    "tags": ["tactical", "open", "serious", "rapid", "blitz", "standard", "vs-kings-pawn"],
+    "moves": "1.e4 d5"
+  },
+  {
+    "name": "Caro-Kann Defense",
+    "eco": "B12",
+    "color": "black",
+    "tags": ["positional", "solid", "defensive", "serious", "standard", "easy", "rapid", "mainline", "endgame", "vs-flank-pawn"],
+    "moves": "1.e4 c6"
+  },
+  {
+    "name": "Queen's Gambit",
+    "eco": "D06",
+    "color": "white",
+    "tags": ["positional", "classical", "mainline", "serious", "standard", "rapid", "blitz", "endgame", "vs-queens-pawn"],
+    "moves": "1.d4 d5 2.c4"
+  },
+  {
+    "name": "Slav Defense",
+    "eco": "D10",
+    "color": "black",
+    "tags": ["positional", "solid", "serious", "standard", "rapid", "blitz", "mainline", "endgame", "vs-queens-pawn"],
+    "moves": "1.d4 d5 2.c4 c6"
+  },
+  {
+    "name": "English Opening",
+    "eco": "A10",
+    "color": "white",
+    "tags": ["positional", "flexible", "casual", "standard", "rapid", "blitz", "mainline", "endgame", "vs-flank-pawn"],
+    "moves": "1.c4"
+  },
+  {
+    "name": "Bird's Opening",
+    "eco": "A02",
+    "color": "white",
+    "tags": ["unusual", "casual", "standard", "blitz", "sideline", "middlegame", "vs-flank-pawn"],
+    "moves": "1.f4"
+  },
+  {
+    "name": "Bongcloud Attack",
+    "eco": "C20",
+    "color": "white",
+    "tags": ["meme", "sharp", "open", "blitz", "casual", "sideline", "vs-kings-pawn"],
+    "moves": "1.e4 e5 2.Ke2"
+  },
+  {
+    "name": "Grob Attack",
+    "eco": "A00",
+    "color": "white",
+    "tags": ["meme", "sharp", "open", "blitz", "casual", "sideline", "vs-flank-pawn"],
+    "moves": "1.g4"
+  },
+  {
+    "name": "Owen's Defense",
+    "eco": "B06",
+    "color": "black",
+    "tags": ["unusual", "casual", "standard", "blitz", "sideline", "middlegame", "vs-flank-pawn"],
+    "moves": "1.e4 b6"
+  },
+  {
+    "name": "Alekhine's Defense",
+    "eco": "B02",
+    "color": "black",
+    "tags": ["tactical", "sharp", "serious", "standard", "blitz", "mainline", "middlegame", "vs-flank-pawn"],
+    "moves": "1.e4 Nf6"
+  },
+  {
+    "name": "Dutch Defense",
+    "eco": "A80",
+    "color": "black",
+    "tags": ["tactical", "attacking", "serious", "standard", "blitz", "mainline", "middlegame", "vs-flank-pawn"],
+    "moves": "1.d4 f5"
+  },
+  {
+    "name": "Scotch Game",
+    "eco": "C45",
+    "color": "white",
+    "tags": ["open", "mainline", "serious", "rapid", "blitz", "tactical", "middlegame", "vs-kings-pawn"],
+    "moves": "1.e4 e5 2.Nf3 Nc6 3.d4 exd4 4.Nxd4"
+  },
+  {
+    "name": "Petrov Defense",
+    "eco": "C42",
+    "color": "black",
+    "tags": ["solid", "mainline", "serious", "positional", "defensive", "classical", "endgame", "vs-kings-pawn"],
+    "moves": "1.e4 e5 2.Nf3 Nf6"
+  },
+  {
+    "name": "Philidor Defense",
+    "eco": "C41",
+    "color": "black",
+    "tags": ["solid", "sideline", "casual", "defensive", "easy", "endgame", "vs-kings-pawn"],
+    "moves": "1.e4 e5 2.Nf3 d6"
+  },
+  {
+    "name": "Vienna Game",
+    "eco": "C25",
+    "color": "white",
+    "tags": ["open", "sideline", "casual", "tactical", "blitz", "middlegame", "vs-kings-pawn"],
+    "moves": "1.e4 e5 2.Nc3"
+  },
+  {
+    "name": "Four Knights Game",
+    "eco": "C47",
+    "color": "white",
+    "tags": ["classical", "mainline", "serious", "positional", "easy", "endgame", "vs-kings-pawn"],
+    "moves": "1.e4 e5 2.Nf3 Nc6 3.Nc3 Nf6"
+  },
+  {
+    "name": "Italian Game (Giuoco Piano)",
+    "eco": "C50",
+    "color": "white",
+    "tags": ["mainline", "serious", "solid", "positional", "classical", "endgame", "standard", "vs-kings-pawn"],
+    "moves": "1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5"
+  },
+  {
+    "name": "Evans Gambit",
+    "eco": "C51",
+    "color": "white",
+    "tags": ["gambit", "sideline", "sharp", "tactical", "attacking", "blitz", "middlegame", "vs-kings-pawn"],
+    "moves": "1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 4.b4"
+  },
+  {
+    "name": "Greco Gambit",
+    "eco": "C50",
+    "color": "white",
+    "tags": ["gambit", "sideline", "sharp", "tactical", "attacking", "blitz", "middlegame", "vs-kings-pawn"],
+    "moves": "1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 4.d4"
+  },
+  {
+    "name": "Rousseau Gambit",
+    "eco": "C50",
+    "color": "black",
+    "tags": ["gambit", "sideline", "sharp", "tactical", "attacking", "blitz", "middlegame", "vs-kings-pawn"],
+    "moves": "1.e4 e5 2.Nf3 Nc6 3.Bc4 f5"
+  },
+  {
+    "name": "Sicilian Defense (Open)",
+    "eco": "B40",
+    "color": "black",
+    "tags": ["mainline", "serious", "sharp", "tactical", "counterattacking", "middlegame", "standard", "vs-kings-pawn"],
+    "moves": "1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4"
+  },
+  {
+    "name": "Smith-Morra Gambit",
+    "eco": "B21",
+    "color": "white",
+    "tags": ["gambit", "sideline", "sharp", "tactical", "attacking", "blitz", "middlegame", "meme", "vs-flank-pawn"],
+    "moves": "1.e4 c5 2.d4 cxd4 3.c3"
+  },
+  {
+    "name": "Sicilian Alapin",
+    "eco": "B22",
+    "color": "white",
+    "tags": ["sideline", "solid", "positional", "casual", "standard", "vs-flank-pawn"],
+    "moves": "1.e4 c5 2.c3"
+  },
+  {
+    "name": "French Defense (Mainline)",
+    "eco": "C00",
+    "color": "black",
+    "tags": ["mainline", "serious", "solid", "positional", "defensive", "endgame", "standard", "vs-kings-pawn"],
+    "moves": "1.e4 e6 2.d4 d5 3.Nc3 Nf6"
+  },
+  {
+    "name": "French Exchange",
+    "eco": "C01",
+    "color": "black",
+    "tags": ["sideline", "solid", "positional", "defensive", "endgame", "casual", "standard", "vs-kings-pawn"],
+    "moves": "1.e4 e6 2.d4 d5 3.exd5 exd5"
+  },
+  {
+    "name": "Queen's Gambit (Mainline)",
+    "eco": "D06",
+    "color": "white",
+    "tags": ["mainline", "serious", "positional", "classical", "endgame", "standard", "vs-queens-pawn"],
+    "moves": "1.d4 d5 2.c4 e6 3.Nc3 Nf6"
+  },
+  {
+    "name": "Queen's Gambit Accepted",
+    "eco": "D20",
+    "color": "black",
+    "tags": ["mainline", "serious", "open", "counterattacking", "middlegame", "standard", "vs-queens-pawn"],
+    "moves": "1.d4 d5 2.c4 dxc4"
+  },
+  {
+    "name": "Albin Countergambit",
+    "eco": "D08",
+    "color": "black",
+    "tags": ["gambit", "sideline", "sharp", "tactical", "attacking", "blitz", "middlegame", "meme", "vs-queens-pawn"],
+    "moves": "1.d4 d5 2.c4 e5"
+  },
+  {
+    "name": "King's Indian Defense (Mainline)",
+    "eco": "E60",
+    "color": "black",
+    "tags": ["mainline", "serious", "sharp", "tactical", "counterattacking", "middlegame", "standard", "vs-queens-pawn"],
+    "moves": "1.d4 Nf6 2.c4 g6 3.Nc3 Bg7 4.e4 d6 5.Nf3 O-O 6.Be2 e5"
+  },
+  {
+    "name": "King's Indian, Fianchetto Variation",
+    "eco": "E60",
+    "color": "white",
+    "tags": ["sideline", "solid", "positional", "serious", "endgame", "standard", "vs-queens-pawn"],
+    "moves": "1.d4 Nf6 2.c4 g6 3.Nf3 Bg7 4.g3"
+  },
+  {
+    "name": "Nimzo-Indian Defense",
+    "eco": "E20",
+    "color": "black",
+    "tags": ["mainline", "serious", "positional", "classical", "standard", "endgame", "vs-queens-pawn"],
+    "moves": "1.d4 Nf6 2.c4 e6 3.Nc3 Bb4"
+  },
+  {
+    "name": "Grünfeld Defense",
+    "eco": "D70",
+    "color": "black",
+    "tags": ["mainline", "serious", "sharp", "counterattacking", "tactical", "middlegame", "standard", "vs-queens-pawn"],
+    "moves": "1.d4 Nf6 2.c4 g6 3.Nc3 d5"
+  },
+  {
+    "name": "Benko Gambit",
+    "eco": "A57",
+    "color": "black",
+    "tags": ["gambit", "sideline", "sharp", "tactical", "counterattacking", "blitz", "middlegame", "vs-queens-pawn"],
+    "moves": "1.d4 Nf6 2.c4 c5 3.d5 b5"
+  },
+  {
+    "name": "Scandinavian Defense, Portuguese Variation",
+    "eco": "B01",
+    "color": "black",
+    "tags": ["sideline", "sharp", "tactical", "blitz", "middlegame", "vs-kings-pawn"],
+    "moves": "1.e4 d5 2.exd5 Nf6 3.d4 Bg4"
+  },
+  {
+    "name": "Caro-Kann, Advance Variation",
+    "eco": "B12",
+    "color": "white",
+    "tags": ["mainline", "serious", "positional", "solid", "standard", "endgame", "vs-flank-pawn"],
+    "moves": "1.e4 c6 2.d4 d5 3.e5"
+  },
+  {
+    "name": "Caro-Kann, Fantasy Variation",
+    "eco": "B12",
+    "color": "white",
+    "tags": ["sideline", "sharp", "tactical", "blitz", "middlegame", "meme", "vs-flank-pawn"],
+    "moves": "1.e4 c6 2.d4 d5 3.f3"
+  },
+  {
+    "name": "English Opening, Botvinnik System",
+    "eco": "A15",
+    "color": "white",
+    "tags": ["mainline", "serious", "positional", "complex", "standard", "middlegame", "vs-flank-pawn"],
+    "moves": "1.c4 Nf6 2.Nc3 e6 3.g3 d5 4.Bg2 Be7 5.Nf3 O-O 6.O-O d4"
+  },
+  {
+    "name": "Dutch Defense, Leningrad Variation",
+    "eco": "A81",
+    "color": "black",
+    "tags": ["mainline", "serious", "sharp", "tactical", "counterattacking", "middlegame", "standard", "vs-queens-pawn"],
+    "moves": "1.d4 f5 2.g3 Nf6 3.Bg2 g6 4.Nf3 Bg7 5.O-O O-O"
+  },
+  {
+    "name": "Scandinavian Defense (Main Line)",
+    "eco": "B01",
+    "color": "black",
+    "tags": ["mainline", "serious", "open", "tactical", "standard", "middlegame", "vs-kings-pawn"],
+    "moves": "1.e4 d5 2.exd5 Qxd5 3.Nc3 Qa5"
+  },
+  {
+    "name": "Vienna Game, Frankenstein-Dracula Variation",
+    "eco": "C27",
+    "color": "white",
+    "tags": ["sideline", "sharp", "tactical", "blitz", "middlegame", "meme", "vs-kings-pawn"],
+    "moves": "1.e4 e5 2.Nc3 Nf6 3.Bc4 Nxe4 4.Qh5 Nd6 5.Bb3 Nc6 6.Nb5 g6 7.Qf3 f5"
+  }
+]

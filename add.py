@@ -18,7 +18,7 @@ def main():
         f.write("/* https://chess.lokiclarke.com 302\n")
     print("Redirect added successfully.")
     system("git add .")
-    system('git commit -am "Add redirect for {}"'.format(shorturl))
+    system('git commit -m "Add redirect for {}"'.format(shorturl))
     system("git push origin main")
 
 if __name__ == "__main__":
