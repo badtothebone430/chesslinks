@@ -122,7 +122,7 @@
     "name": "Alekhine's Defense",
     "eco": "B02",
     "color": "black",
-    "tags": ["tactical", "sharp", "serious", "standard", "blitz", "mainline", "middlegame", "vs-flank-pawn"],
+    "tags": ["tactical", "sharp", "serious", "standard", "blitz", "mainline", "middlegame", "vs-kings-pawn"],
     "moves": "1.e4 Nf6"
   },
   {

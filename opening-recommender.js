@@ -41,6 +41,20 @@ const questions = [
     id: 'line',
     label: 'Do you want to surprise your opponent or play something more concrete?',
     options: ['Surprise', 'Concrete', "Doesn't matter"]
+  },
+  {
+    id: 'priority',
+    label: 'Which feature do you value the most?',
+    options: [
+      'Time control',
+      'Style',
+      'Rating',
+      'Approach',
+      'Sharpness',
+      'Phase',
+      'Vibe',
+      'Line type'
+    ]
   }
 ];
 
@@ -58,12 +72,30 @@ window.addEventListener('DOMContentLoaded', async () => {
   });
   form.innerHTML += `<button type='submit' class='modern-btn' style='width:220px;'>Get My Openings</button>`;
 
-  form.onsubmit = function(e) {
+  form.onsubmit = async function(e) {
     e.preventDefault();
+    // Show loading spinners while processing
+    ['white-kings-pawn', 'white-queens-pawn', 'white-flank-pawn', 'black-kings-pawn', 'black-queens-pawn', 'black-flank-pawn'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = '<div class="spinner"></div>';
+    });
+    await new Promise(r => setTimeout(r, 100)); // Simulate async loading
     const answers = {};
     questions.forEach(q => {
       answers[q.id] = document.getElementById(q.id).value;
     });
+    // Map priority to question id
+    const priorityMap = {
+      'time control': 'timecontrol',
+      'style': 'style',
+      'rating': 'rating',
+      'approach': 'approach',
+      'sharpness': 'sharpness',
+      'phase': 'phase',
+      'vibe': 'vibe',
+      'line type': 'line'
+    };
+    const priorityId = priorityMap[answers['priority']];
     // Tag mapping
     const tagMap = {
       blitz: 'blitz', rapid: 'rapid', classical: 'classical', bullet: 'bullet',
@@ -96,10 +128,16 @@ window.addEventListener('DOMContentLoaded', async () => {
       const scored = catOpenings.map(opening => {
         let score = 0;
         let matchedTags = [];
-        Object.values(answers).forEach(ans => {
+        Object.entries(answers).forEach(([qid, ans]) => {
+          if (qid === 'priority') return; // skip priority itself
           const tag = tagMap[ans] || '';
           if (tag && opening.tags.includes(tag)) {
-            score++;
+            // Double the score if this is the prioritized feature
+            if (qid === priorityId) {
+              score += 2;
+            } else {
+              score++;
+            }
             matchedTags.push(tag);
           }
         });
@@ -163,12 +201,12 @@ window.addEventListener('DOMContentLoaded', async () => {
     // For White
     ['white-kings-pawn', 'white-queens-pawn', 'white-flank-pawn'].forEach((id, idx, arr) => {
       const el = document.getElementById(id);
-      if (el) el.style.marginBottom = (idx < arr.length - 1) ? '120px' : '0';
+      if (el) el.style.marginBottom = (idx < arr.length - 1) ? '48px' : '0';
     });
     // For Black
     ['black-kings-pawn', 'black-queens-pawn', 'black-flank-pawn'].forEach((id, idx, arr) => {
       const el = document.getElementById(id);
-      if (el) el.style.marginBottom = (idx < arr.length - 1) ? '120px' : '0';
+      if (el) el.style.marginBottom = (idx < arr.length - 1) ? '48px' : '0';
     });
   };
 });
