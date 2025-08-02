@@ -1,2 +1,8 @@
+# Ignore backend analysis and stats files
+openings-stats.js
+openings-stats-advanced.js
+openings-stats.json
 push_with_message.cmd
 add.py
+.js
+new.js

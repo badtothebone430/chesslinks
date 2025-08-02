@@ -141,6 +141,10 @@ window.addEventListener('DOMContentLoaded', async () => {
             matchedTags.push(tag);
           }
         });
+        // Apply dubious nerf: lower score by 7% if opening is dubious
+        if (opening.tags.includes('dubious')) {
+          score *= 0.93;
+        }
         return { opening, score, matchedTags };
       });
       // Find best for White and Black
