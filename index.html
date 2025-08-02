@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="A collection of chess tools including opening recommendations, statistics, and Lichess leaderboards." />
   <meta name="author" content="Loki Clarke" />
+  <meta name="theme-color" content="#00ffe0" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/864/864639.png" />
   <title>Chess Tools</title>
   <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/864/864639.png" />
   <link rel="stylesheet" href="style.css" />
@@ -71,6 +74,13 @@
     <audio id="chessMoveSound" src="https://cdn.jsdelivr.net/gh/lichess-org/lila@master/public/sound/standard/Move.mp3" preload="auto"></audio>
     <audio id="chessCaptureSound" src="https://cdn.jsdelivr.net/gh/lichess-org/lila@master/public/sound/standard/Capture.mp3" preload="auto"></audio>
   <script src="script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('service-worker.js');
+      });
+    }
+  </script>
   <div id="footer-credit">Made By Loki Clarke</div>
   </body>
 </html>

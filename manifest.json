@@ -1,0 +1,23 @@
+{
+  "name": "Chess Tools",
+  "short_name": "ChessTools",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#181818",
+  "theme_color": "#00ffe0",
+  "description": "A collection of chess tools including opening recommendations, statistics, and Lichess leaderboards.",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/864/864639.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/864/864639.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
