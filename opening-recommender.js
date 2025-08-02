@@ -141,9 +141,14 @@ window.addEventListener('DOMContentLoaded', async () => {
             matchedTags.push(tag);
           }
         });
-        // Apply dubious nerf: lower score by 7% if opening is dubious
-        if (opening.tags.includes('dubious')) {
-          score *= 0.93;
+        // Apply dubious nerf: lower score by 10% if time control is classical, 7% otherwise (unless bullet)
+        const timeControl = answers['timecontrol'];
+        if (opening.tags.includes('dubious') && timeControl !== 'bullet') {
+          if (timeControl === 'classical') {
+            score *= 0.90;
+          } else {
+            score *= 0.93;
+          }
         }
         return { opening, score, matchedTags };
       });
