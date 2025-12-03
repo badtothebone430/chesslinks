@@ -189,13 +189,6 @@
     "moves": "1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 4.d4"
   },
   {
-    "name": "Greco Gambit",
-    "eco": "C50",
-    "color": "white",
-    "tags": ["gambit", "sideline", "sharp", "tactical", "attacking", "blitz", "middlegame", "vs-kings-pawn"],
-    "moves": "1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 4.d4"
-  },
-  {
     "name": "Rousseau Gambit",
     "eco": "C50",
     "color": "black",

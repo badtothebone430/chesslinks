@@ -1,4 +1,4 @@
-# Responsive mobile layout
+/* Responsive mobile layout*/
 @media (max-width: 480px) {
   .panel {
     width: 98vw;
